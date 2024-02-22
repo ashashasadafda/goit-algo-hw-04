@@ -40,7 +40,7 @@ def get_cats_info(fname):
                     cat_id, name, age = line.strip().split(',')
                     cats_info.append({"id": cat_id, "name": name, "age": age})
                 except ValueError:
-                    print(f"Некоректний рядок у файлі: {line.strip()}")
+                    print(f"некоректний рядок у файлі: {line.strip()}")
     except FileNotFoundError: # а раптом
         print("файлу не знайдено")
 
