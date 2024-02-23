@@ -1,54 +1,54 @@
 # завдання 1
-def total_salary(fname):
-    total_salary = 0
-    pracivnuku_count = 0
+# def total_salary(fname):
+#     total_salary = 0
+#     pracivnuku_count = 0
 
-    try:
-        with open(fname, 'r',) as file:
-            for line in file:
-                try:
-                    name, salary = line.strip().split(',')
-                    total_salary += int(salary)
-                    pracivnuku_count += 1
-                except:
-                    ValueError
+#     try:
+#         with open(fname, 'r',) as file:
+#             for line in file:
+#                 try:
+#                     name, salary = line.strip().split(',')
+#                     total_salary += int(salary)
+#                     pracivnuku_count += 1
+#                 except:
+#                     ValueError
                     
-    except FileNotFoundError: # а раптом
-        print("файлу не знайдено")
+#     except FileNotFoundError: # а раптом
+#         print("файлу не знайдено")
 
-    if pracivnuku_count > 0:
-        average_salary = total_salary / pracivnuku_count
-    else:
-        average_salary = 0
+#     if pracivnuku_count > 0:
+#         average_salary = total_salary / pracivnuku_count
+#     else:
+#         average_salary = 0
 
-    return total_salary, average_salary
+#     return total_salary, average_salary
 
 
-total, average = total_salary("123(1).txt")
-print(f"загальна сума зарплати: {total}, а cередня: {average}")
+# total, average = total_salary("123(1).txt")
+# print(f"загальна сума зарплати: {total}, а cередня: {average}")
 
 
 
 # завдання 2 
-def get_cats_info(fname):
-    cats_info = []
+# def get_cats_info(fname):
+#     cats_info = []
     
-    try:
-        with open(fname, 'r',) as file:
-            for line in file:
-                try:
-                    cat_id, name, age = line.strip().split(',')
-                    cats_info.append({"id": cat_id, "name": name, "age": age})
-                except ValueError:
-                    print(f"некоректний рядок у файлі: {line.strip()}")
-    except FileNotFoundError: # а раптом
-        print("файлу не знайдено")
+#     try:
+#         with open(fname, 'r',) as file:
+#             for line in file:
+#                 try:
+#                     cat_id, name, age = line.strip().split(',')
+#                     cats_info.append({"id": cat_id, "name": name, "age": age})
+#                 except ValueError:
+#                     print(f"некоректний рядок у файлі: {line.strip()}")
+#     except FileNotFoundError: # а раптом
+#         print("файлу не знайдено")
 
 
-    return cats_info
+#     return cats_info
 
-cats_info = get_cats_info("123(2).txt")
-print(cats_info)
+# cats_info = get_cats_info("123(2).txt")
+# print(cats_info)
 
 
 
@@ -80,40 +80,61 @@ def show_all(phonebook):
 
 
 def parse_input(command):
+    # parts = []
+    
+    # for part in command:
     parts = command.split()
+    return parts
     
-    if len(parts) == 0:
-        return None, None, None     # ннічого не поверне якщо команда 0 слів
-    action = parts[0].lower()
+    # if len(parts) == 0:
+    #     return None, None, None     # ннічого не поверне якщо команда 0 слів
+    # action = parts[0].lower()
     
-    if action == "add" and len(parts) == 3:
-        return action, parts[1], parts[2]
+    # if action == "add" and len(parts) == 3:
+    #     return action, parts[1], parts[2]
     
-    elif action == "change" and len(parts) == 3:
-        return action, parts[1], parts[2]
+    # elif action == "change" and len(parts) == 3:
+    #     return action, parts[1], parts[2]
     
-    elif action == "phone" and len(parts) == 2:
-        return action, parts[1], None
+    # elif action == "phone" and len(parts) == 2:
+    #     return action, parts[1], None
     
-    elif action == "all" and len(parts) == 1:
-        return action, None, None
+    # elif action == "all" and len(parts) == 1:
+    #     return action, None, None
     
-    elif action in ["close", "exit"] and len(parts) == 1:
-        return action, None, None
+    # elif action in ["close", "exit"] and len(parts) == 1:
+    #     return action, None, None
     
-    elif action == "hello" and len(parts) == 1:
-        return action, None, None
+    # elif action == "hello" and len(parts) == 1:
+    #     return action, None, None
     
-    else:
-        return None, None, None
+    # else:
+    #     return None, None, None
 
 def main():
-    phonebook_bot = {} # оголоси
+    phonebook_bot = {}
     while True:
         command = input("введіть команду або 'close'/'exit' для виходу: ").strip()
 
-        action, arg1, arg2 = parse_input(command)
+        parts = parse_input(command)
+        print(f"трока для перевірки, щоб подивитись на список, який нам засплітило: {parts}") # строка для перевірки
+        if len(parts) == 1:
+            action = parts[0]
 
+        elif len(parts) == 2:
+            action = parts[0]
+            arg1 = parts[1]
+            
+        elif len(parts) == 3:
+            action = parts[0]
+            arg1 = parts[1]
+            arg2 = parts[2]
+            
+        else:
+            print("такої команди не існує")
+            ValueError
+            
+            
         match action:   # через switch начебто легше 
             case "close":
                 print("закриваюсь")
@@ -136,6 +157,7 @@ def main():
                 
             case "all":
                 show_all(phonebook_bot)
+                
             case other:
                 print("такої команди нема")
 
@@ -143,6 +165,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
 
 
 
