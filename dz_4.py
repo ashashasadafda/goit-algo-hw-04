@@ -55,27 +55,27 @@
 #завдання 3
 def add_contact(phonebook, name, number):
     phonebook[name] = number
-    print(f"контакт {name} додано до бази ботіка")
+    return (f"контакт {name} додано до бази ботіка")
 
 def change_contact(phonebook, name, new_number):
     if name in phonebook:
         phonebook[name] = new_number
-        print(f"контакт {name} оновлен")
+        return (f"контакт {name} оновлен")
     else:
-        print("такого контакту немає в базі ботіка")
+        return ("такого контакту немає в базі ботіка")
 
 def show_phone(phonebook, name):
     if name in phonebook:
-        print(f"номер телефону для конаткту {name}: {phonebook[name]}")
+        return (f"номер телефону для конаткту {name}: {phonebook[name]}")
     else:
-        print("такого контакту немає в базі ботіка")
+        return ("такого контакту немає в базі ботіка")
 
 def show_all(phonebook):
     if phonebook:
         for name, number in phonebook.items():
-            print(f"{name}: {number}")
+            return (f"{name}: {number}")
     else:
-        print("база ботіка пуста")
+        return ("база ботіка пуста")
 
 
 
@@ -85,31 +85,7 @@ def parse_input(command):
     # for part in command:
     parts = command.split()
     return parts
-    
-    # if len(parts) == 0:
-    #     return None, None, None     # ннічого не поверне якщо команда 0 слів
-    # action = parts[0].lower()
-    
-    # if action == "add" and len(parts) == 3:
-    #     return action, parts[1], parts[2]
-    
-    # elif action == "change" and len(parts) == 3:
-    #     return action, parts[1], parts[2]
-    
-    # elif action == "phone" and len(parts) == 2:
-    #     return action, parts[1], None
-    
-    # elif action == "all" and len(parts) == 1:
-    #     return action, None, None
-    
-    # elif action in ["close", "exit"] and len(parts) == 1:
-    #     return action, None, None
-    
-    # elif action == "hello" and len(parts) == 1:
-    #     return action, None, None
-    
-    # else:
-    #     return None, None, None
+
 
 def main():
     phonebook_bot = {}
@@ -117,7 +93,7 @@ def main():
         command = input("введіть команду або 'close'/'exit' для виходу: ").strip()
 
         parts = parse_input(command)
-        print(f"трока для перевірки, щоб подивитись на список, який нам засплітило: {parts}") # строка для перевірки
+        print(f"\n---> cтрока для перевірки, щоб подивитись на список, який нам засплітило: {parts} <---\n") # строка для перевірки
         if len(parts) == 1:
             action = parts[0]
 
@@ -147,16 +123,16 @@ def main():
                 print("привіт. як я вам можу допомогти ?")
                 
             case "add":
-                add_contact(phonebook_bot, arg1, arg2)
+                print(add_contact(phonebook_bot, arg1, arg2))
                 
             case "change":
-                change_contact(phonebook_bot, arg1, arg2)
+                print(change_contact(phonebook_bot, arg1, arg2))
                 
             case "phone":
-                show_phone(phonebook_bot, arg1)
+                print(show_phone(phonebook_bot, arg1))
                 
             case "all":
-                show_all(phonebook_bot)
+                print(f"-------------\n{show_all(phonebook_bot)}\n-------------")
                 
             case other:
                 print("такої команди нема")
