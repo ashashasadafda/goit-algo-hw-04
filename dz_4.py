@@ -55,37 +55,32 @@
 #завдання 3
 def add_contact(phonebook, name, number):
     phonebook[name] = number
-    return (f"контакт {name} додано до бази ботіка")
+    return f"контакт {name} додано до бази ботіка"
 
 def change_contact(phonebook, name, new_number):
     if name in phonebook:
         phonebook[name] = new_number
-        return (f"контакт {name} оновлен")
+        return f"контакт {name} оновлен"
     else:
-        return ("такого контакту немає в базі ботіка")
+        return "такого контакту немає в базі ботіка"
 
 def show_phone(phonebook, name):
     if name in phonebook:
-        return (f"номер телефону для конаткту {name}: {phonebook[name]}")
+        return f"номер телефону для контакту {name}: {phonebook[name]}"
     else:
-        return ("такого контакту немає в базі ботіка")
+        return "такого контакту немає в базі ботіка"
 
 def show_all(phonebook):
     if phonebook:
+        contacts = ""
         for name, number in phonebook.items():
-            return (f"{name}: {number}")
+            contacts += f"{name}: {number}\n"
+        return contacts
     else:
-        return ("база ботіка пуста")
-
-
+        return "база ботіка пуста"
 
 def parse_input(command):
-    # parts = []
-    
-    # for part in command:
-    parts = command.split()
-    return parts
-
+    return command.split()
 
 def main():
     phonebook_bot = {}
@@ -93,51 +88,38 @@ def main():
         command = input("введіть команду або 'close'/'exit' для виходу: ").strip()
 
         parts = parse_input(command)
-        print(f"\n---> cтрока для перевірки, щоб подивитись на список, який нам засплітило: {parts} <---\n") # строка для перевірки
+
         if len(parts) == 1:
             action = parts[0]
-
         elif len(parts) == 2:
-            action = parts[0]
-            arg1 = parts[1]
-            
+            action, arg1 = parts
         elif len(parts) == 3:
-            action = parts[0]
-            arg1 = parts[1]
-            arg2 = parts[2]
-            
+            action, arg1, arg2 = parts
         else:
             print("такої команди не існує")
-            ValueError
-            
-            
-        match action:   # через switch начебто легше 
-            case "close":
-                print("закриваюсь")
-                break
-            case "exit":
-                print("закриваюсь")
-                break
-                
-            case "hello":
-                print("привіт. як я вам можу допомогти ?")
-                
-            case "add":
-                print(add_contact(phonebook_bot, arg1, arg2))
-                
-            case "change":
-                print(change_contact(phonebook_bot, arg1, arg2))
-                
-            case "phone":
-                print(show_phone(phonebook_bot, arg1))
-                
-            case "all":
-                print(f"-------------\n{show_all(phonebook_bot)}\n-------------")
-                
-            case other:
-                print("такої команди нема")
+            continue
 
-
+        if action == "close" or action == "exit":
+            print("закриваюсь")
+            break
+        
+        elif action == "hello":
+            print("привіт. як я вам можу допомогти ?")
+            
+        elif action == "add":
+            print(add_contact(phonebook_bot, arg1, arg2))
+            
+        elif action == "change":
+            print(change_contact(phonebook_bot, arg1, arg2))
+            
+        elif action == "phone":
+            print(show_phone(phonebook_bot, arg1))
+            
+        elif action == "all":
+            print(f"-------------\n{show_all(phonebook_bot)}\n-------------")
+            
+        else:
+            print("такої команди нема")
 
 if __name__ == "__main__":
     main()
